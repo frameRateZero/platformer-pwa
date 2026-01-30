@@ -1247,7 +1247,7 @@ export default function FlatPlatformer() {
       });
       
       if (level >= 10 && invisiblePlatforms.length > 0) {
-        invisiblePlatforms.forEach((platform: MovingPlatform) => {
+        invisiblePlatforms.forEach((platform: Platform) => {
           const px = platform.x - camera.x;
           ctx.fillStyle = 'rgba(255, 255, 255, 0.15)';
           ctx.fillRect(px, platform.y, platform.w, platform.h);
@@ -1277,7 +1277,7 @@ export default function FlatPlatformer() {
         
         ctx.strokeRect(player.x - camera.x, player.y, player.w, player.h);
         
-        allPlatforms.forEach((platform: MovingPlatform) => {
+        allPlatforms.forEach((platform: Platform | MovingPlatform) => {
           ctx.strokeRect(platform.x - camera.x, platform.y, platform.w, platform.h);
         });
         
