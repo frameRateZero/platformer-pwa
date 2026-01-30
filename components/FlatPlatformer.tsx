@@ -259,7 +259,7 @@ export default function FlatPlatformer() {
     };
     
     if (levelNum >= 10) {
-      const levelVariations = {
+      const levelVariations: { [key: number]: any } = {
         10: {
           platforms: [
             { x: 0, y: 450, w: 220, h: 20 },
