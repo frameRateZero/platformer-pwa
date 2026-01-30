@@ -400,7 +400,7 @@ export default function FlatPlatformer() {
             { x: 1500, y: 330, w: 160, h: 20 },
             { x: 2090, y: 300, w: 150, h: 20 }
           ],
-          invisiblePlatforms2: [
+          invisiblePlatforms: [
             { x: 770, y: 350, w: 170, h: 20 }
           ],
           goalFlag: { x: 2730, y: 240, w: 40, h: 100 }
