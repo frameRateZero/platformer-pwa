@@ -395,13 +395,11 @@ export default function FlatPlatformer() {
           invisiblePlatforms: [
             { x: 290, y: 400, w: 170, h: 20 },
             { x: 530, y: 370, w: 170, h: 20 },
+            { x: 770, y: 350, w: 170, h: 20 },
             { x: 1020, y: 340, w: 160, h: 20 },
             { x: 1260, y: 340, w: 160, h: 20 },
             { x: 1500, y: 330, w: 160, h: 20 },
             { x: 2090, y: 300, w: 150, h: 20 }
-          ],
-          invisiblePlatforms: [
-            { x: 770, y: 350, w: 170, h: 20 }
           ],
           goalFlag: { x: 2730, y: 240, w: 40, h: 100 }
         },
