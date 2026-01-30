@@ -10,7 +10,7 @@ export default function FlatPlatformer() {
   const [touchControls, setTouchControls] = useState({ left: false, right: false, jump: false });
   
   const getLevelData = (levelNum: number) => {
-    const levels = {
+    const levels: { [key: number]: any } = {
       1: {
         platforms: [
           { x: 0, y: 400, w: 300, h: 20 },
