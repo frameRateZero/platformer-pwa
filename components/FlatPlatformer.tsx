@@ -1,12 +1,12 @@
 import React, { useState, useEffect, useRef } from 'react';
 
 export default function FlatPlatformer() {
-  const canvasRef = useRef(null);
-  const animationFrame = useRef(0);
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const animationFrame = useRef<number>(0);
   const [level, setLevel] = useState(1);
   const [showHitboxes, setShowHitboxes] = useState(false);
   const [godMode, setGodMode] = useState(false);
-  const [controlMode, setControlMode] = useState(null); // null = menu, 'keyboard', 'mobile'
+  const [controlMode, setControlMode] = useState<string | null>(null); // null = menu, 'keyboard', 'mobile'
   const [touchControls, setTouchControls] = useState({ left: false, right: false, jump: false });
   
   const getLevelData = (levelNum: number) => {
@@ -447,11 +447,11 @@ export default function FlatPlatformer() {
         
         return {
           ...baseLevel,
-          movingPlatforms: baseLevel.movingPlatforms.map(p => ({
+          movingPlatforms: baseLevel.movingPlatforms.map((p: any) => ({
             ...p,
             speed: p.speed + difficultyBoost
           })),
-          enemies: baseLevel.enemies.map(e => ({
+          enemies: baseLevel.enemies.map((e: any) => ({
             ...e,
             speed: e.speed + difficultyBoost * 0.5
           }))
@@ -462,7 +462,7 @@ export default function FlatPlatformer() {
     return levels[levelNum] || levels[1];
   };
   
-  const gameStateRef = useRef({
+  const gameStateRef = useRef<any>({
     player: { 
       x: 100, 
       y: 300, 
@@ -481,10 +481,10 @@ export default function FlatPlatformer() {
     ...getLevelData(1)
   });
   
-  const keys = useRef({ left: false, right: false, up: false, jumpPressed: false });
+  const keys = useRef<any>({ left: false, right: false, up: false, jumpPressed: false });
 
   useEffect(() => {
-    const handleKeyDown = (e) => {
+    const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'ArrowLeft' || e.key === 'a') keys.current.left = true;
       if (e.key === 'ArrowRight' || e.key === 'd') keys.current.right = true;
       if ((e.key === 'ArrowUp' || e.key === 'w' || e.key === ' ') && !keys.current.up) {
@@ -556,7 +556,7 @@ export default function FlatPlatformer() {
       }
     };
 
-    const handleKeyUp = (e) => {
+    const handleKeyUp = (e: KeyboardEvent) => {
       if (e.key === 'ArrowLeft' || e.key === 'a') keys.current.left = false;
       if (e.key === 'ArrowRight' || e.key === 'd') keys.current.right = false;
       if (e.key === 'ArrowUp' || e.key === 'w' || e.key === ' ') {
@@ -574,7 +574,7 @@ export default function FlatPlatformer() {
     };
   }, [godMode, level]);
 
-  const drawPlayer = (ctx, player, camera, frame) => {
+  const drawPlayer = (ctx: any, player: any, camera: any, frame: any) => {
     const x = player.x - camera.x;
     const y = player.y;
     
@@ -739,7 +739,7 @@ export default function FlatPlatformer() {
     ctx.restore();
   };
 
-  const drawGoalFlag = (ctx, flag, camera, frame) => {
+  const drawGoalFlag = (ctx: any, flag: any, camera: any, frame: any) => {
     const x = flag.x - camera.x;
     const y = flag.y;
     const wave = Math.sin(frame * 0.1);
@@ -806,7 +806,7 @@ export default function FlatPlatformer() {
     ctx.globalAlpha = 1;
   };
 
-  const drawEnemy = (ctx, enemy, camera, frame) => {
+  const drawEnemy = (ctx: any, enemy: any, camera: any, frame: any) => {
     const x = enemy.x - camera.x;
     const y = enemy.y;
     const bounce = Math.sin(frame * 0.2) * 2;
@@ -835,7 +835,7 @@ export default function FlatPlatformer() {
     ctx.stroke();
   };
 
-  const drawSpikes = (ctx, spike, camera) => {
+  const drawSpikes = (ctx: any, spike: any, camera: any) => {
     const x = spike.x - camera.x;
     const y = spike.y;
     
@@ -860,7 +860,7 @@ export default function FlatPlatformer() {
     ctx.fillRect(x, y + spike.h, spike.w, 5);
   };
   
-  const getSpikeHitbox = (spike) => {
+  const getSpikeHitbox = (spike: any) => {
     return {
       x: spike.x + spike.w * 0.1,
       y: spike.y,
@@ -876,7 +876,8 @@ export default function FlatPlatformer() {
     if (!canvas) return;
     
     const ctx = canvas.getContext('2d');
-    let animationId;
+    if (!ctx) return;
+    let animationId: number;
 
     const gameLoop = () => {
       animationFrame.current++;
