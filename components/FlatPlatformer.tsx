@@ -9,7 +9,7 @@ export default function FlatPlatformer() {
   const [controlMode, setControlMode] = useState(null); // null = menu, 'keyboard', 'mobile'
   const [touchControls, setTouchControls] = useState({ left: false, right: false, jump: false });
   
-  const getLevelData = (levelNum) => {
+  const getLevelData = (levelNum: number) => {
     const levels = {
       1: {
         platforms: [
